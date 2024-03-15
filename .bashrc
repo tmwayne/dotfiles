@@ -60,5 +60,6 @@ alias pip='pip3'
 alias pyenv='source .env-py/bin/activate'
 alias mkenv='python3 -m venv .env-py'
 
+[[ -n "$TMUX" && -f ~/.tmux.sh ]] && source ~/.tmux.sh
 [ -f ~/.go ] && source ~/.go
 [ -f ~/.bash_aliases ] && source ~/.bash_aliases
