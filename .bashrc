@@ -3,12 +3,16 @@
 # General configurations to use across machines.
 # Machine specific configurations are saved in ~/.bash_aliases
 
+[[ $- != *i* ]] && return
+[ -f ~/.bashrc_prehook.sh ] && source ~/.bashrc_prehook.sh
+
 # history ----------------------------------------------------------------------
 
 HISTSIZE=130000
 HISTFILESIZE=-1
 HISTTIMEFORMAT="%F %H:%M" # date and time for each entry
 HISTCONTROL=ignoredups:ignorespace:erasedups # don't put duplicate lines in the history
+shopt -s histappend
 export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
 
 set -o vi # set bash to vi editing mode
