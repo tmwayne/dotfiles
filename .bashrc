@@ -45,15 +45,16 @@ export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quo
 
 # aliases ----------------------------------------------------------------------
 
-alias gdb     = 'gdb -q'
-alias python  = 'python3'
-alias pip     = 'pip3'
-alias pyenv   = 'source .env-py/bin/activate'
-alias mkenv   = 'python3 -m venv .env-py'
-alias rgrep   = 'grep -Rls'
-alias ll      = 'ls -lhA'
-alias rm      = 'rm -i'
-alias vim     = 'nvim'
+alias ll='ls -lhA'
+alias rm='rm -i'
+alias rgrep='grep -Rls'
+alias vim='nvim'
+
+alias gdb='gdb -q'
+alias python='python3'
+alias pip='pip3'
+alias pyenv='source .env-py/bin/activate'
+alias mkenv='python3 -m venv .env-py'
 
 [ -f ~/.go ] && source ~/.go
 [ -f ~/.bash_aliases ] && source ~/.bash_aliases
