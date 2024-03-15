@@ -1,0 +1,23 @@
+[user]
+	email = tylerwayne3@gmail.com
+	name = Tyler Wayne
+[init]
+	templatedir = ~/.git_template
+	defaultBranch = master
+[alias]
+  plog = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %Cgreen(%cr) %C(bold blue)<%an>%Creset %s ' --abbrev-commit
+	ctags = !.git/hooks/ctags
+	last = log -1 HEAD
+  unstage = reset HEAD --
+	discard = checkout --
+  purge = clean -d -f
+  shallow-clone = clone --depth 1
+  fadd = add -f
+[diff]
+	tool = vimdiff
+[merge]
+	tool = vimdiff
+[difftool]
+	prompt = false
+[pull]
+	rebase = true
