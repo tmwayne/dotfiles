@@ -21,11 +21,11 @@ _go_list() {
 # }
 
 _go_set() {
-    export go$1=$(_go_dir $1)
+    export $1=$(_go_dir $1)
 }
 
 _go_unset() {
-    unset go$1
+    unset $1
 }
 
 go_dir() {
