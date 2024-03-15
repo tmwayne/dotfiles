@@ -25,7 +25,7 @@ stty stop undef # disassociate ^S so it works for forward-search-history
 
 # environment variables --------------------------------------------------------
 
-if [ -d "$HOME/.local/bin" ]; then export PATH="$HOME/.local/bin:$PATH"; fi
+[ -d "$HOME/.local/bin" ] && export PATH="$HOME/.local/bin/:$PATH"
 
 export PAGER=less
 export EDITOR=$([ $(which nvim 2> /dev/null) ] && echo nvim || echo vim)
@@ -45,20 +45,15 @@ export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quo
 
 # aliases ----------------------------------------------------------------------
 
-# C/Asm
-alias gdb='gdb -q'
+alias gdb     = 'gdb -q'
+alias python  = 'python3'
+alias pip     = 'pip3'
+alias pyenv   = 'source .env-py/bin/activate'
+alias mkenv   = 'python3 -m venv .env-py'
+alias rgrep   = 'grep -Rls'
+alias ll      = 'ls -lhA'
+alias rm      = 'rm -i'
+alias vim     = 'nvim'
 
-# Python related
-alias python=python3
-alias pip=pip3
-alias pyenv='source .env-py/bin/activate'
-alias mkenv='python3 -m venv .env-py'
-
-alias rgrep='grep -Rls'
-alias ll='ls -lhA'
-alias rm='rm -i'
-
-alias vim='nvim'
-
-# Source computer specific aliases
-[ -f ~/.bash_aliases ] && . ~/.bash_aliases
+[ -f ~/.go ] && source ~/.go
+[ -f ~/.bash_aliases ] && source ~/.bash_aliases
