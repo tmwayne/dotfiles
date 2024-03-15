@@ -1,0 +1,5 @@
+# .gitignore
+
+# files
+[a-zA-Z]*
+.*
