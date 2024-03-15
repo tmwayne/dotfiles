@@ -5,14 +5,15 @@
 	templatedir = ~/.git_template
 	defaultBranch = master
 [alias]
-  plog = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %Cgreen(%cr) %C(bold blue)<%an>%Creset %s ' --abbrev-commit
 	ctags = !.git/hooks/ctags
-	last = log -1 HEAD
-  unstage = reset HEAD --
 	discard = checkout --
+	last = log -1 HEAD
+  ls = ls-tree -r HEAD
+  fadd = add -f
+  plog = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %Cgreen(%cr) %C(bold blue)<%an>%Creset %s ' --abbrev-commit
   purge = clean -d -f
   shallow-clone = clone --depth 1
-  fadd = add -f
+  unstage = reset HEAD --
 [diff]
 	tool = vimdiff
 [merge]
