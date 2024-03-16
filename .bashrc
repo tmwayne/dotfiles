@@ -21,7 +21,7 @@ stty stop undef # disassociate ^S so it works for forward-search-history
 # Stop bash from escaping environment variables on tab completion
 # https://askubuntu.com/questions/70750
 #   /how-to-get-bash-to-stop-escaping-during-tab-completion
-[ $(uname -s) = "Darwin" ] || shopt -s direxpand
+[ $(uname -s) = "Linux" ] && shopt -s direxpand
 
 # Prevent overwriting existing files with the > operator
 # Use >! to force files to be overwritten
