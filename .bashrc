@@ -10,8 +10,8 @@
 
 HISTSIZE=130000
 HISTFILESIZE=-1
-HISTTIMEFORMAT="%F %H:%M" # date and time for each entry
-HISTCONTROL=ignoredups:ignorespace:erasedups # don't put duplicate lines in the history
+HISTTIMEFORMAT="%F %H:%M" 
+HISTCONTROL=ignoredups:ignorespace:erasedups 
 shopt -s histappend
 export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
 
@@ -22,10 +22,6 @@ stty stop undef # disassociate ^S so it works for forward-search-history
 # https://askubuntu.com/questions/70750
 #   /how-to-get-bash-to-stop-escaping-during-tab-completion
 [ $(uname -s) = "Linux" ] && shopt -s direxpand
-
-# Prevent overwriting existing files with the > operator
-# Use >! to force files to be overwritten
-# set -o noclobber
 
 # environment variables --------------------------------------------------------
 
@@ -44,7 +40,6 @@ if [ -x /usr/bin/dircolors ]; then
   alias less='less -r'
 fi
 
-# colored GCC warnings and errors
 export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
 # aliases ----------------------------------------------------------------------
@@ -59,6 +54,8 @@ alias python='python3'
 alias pip='pip3'
 alias pyenv='source .env-py/bin/activate'
 alias mkenv='python3 -m venv .env-py'
+
+# other source -----------------------------------------------------------------
 
 [[ -n "$TMUX" && -f ~/.tmux.sh ]] && source ~/.tmux.sh
 [ -f ~/.go ] && source ~/.go
