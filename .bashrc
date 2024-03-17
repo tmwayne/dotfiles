@@ -57,7 +57,7 @@ alias mkenv='python3 -m venv .env-py'
 
 # other sources ----------------------------------------------------------------
 
-[[ -n "$TMUX" && -f ~/.tmux.sh ]] && source ~/.tmux.sh
+[ -n "$TMUX" ] && [ -f ~/.tmux.sh ] && source ~/.tmux.sh
 [ -f ~/.go ] && source ~/.go
 [ -d ~/.bashrc.d ] && for f in ~/.bashrc.d/*.sh; do source $f; done
 [ -d ~/.bash_aliases.d ] && for f in ~/.bash_aliases.d/*.sh; do source $f; done
