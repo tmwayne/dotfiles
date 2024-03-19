@@ -71,8 +71,8 @@ go() {
     shift
     case "$arg" in
       --help)         set -- "$@" "-h" ;;
-      --*)            >&2 echo "$THIS_PROG: unrecognized option '$arg'"
-                      echo "Try '$THIS_PROG --help' for more information."
+      --*)            >&2 echo "go: unrecognized option '$arg'"
+                      echo "Try 'go --help' for more information."
                       return 2 ;;
       *)              set -- "$@" "$arg"
     esac
@@ -83,8 +83,8 @@ go() {
   while getopts ":h" opt; do
     case $opt in
       h)  Help; return 0 ;;
-      \?) >&2 echo "$THIS_PROG: unrecognized option '-$OPTARG'"
-          echo "Try '$THIS_PROG --help' for more information."
+      \?) >&2 echo "go: unrecognized option '-$OPTARG'"
+          echo "Try 'go --help' for more information."
           return 2 ;;
     esac
   done
