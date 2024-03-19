@@ -3,7 +3,7 @@
 # https://raw.github.com/smanikarnika/etc/master/.bash_go
 
 _go_dir() {
-    dir=$1
+    local dir=$1
     [ -f $GO_DIR/$1 ] && dir="$(cat $GO_DIR/$1)"
     echo $dir
 }
@@ -29,7 +29,7 @@ _go_unset() {
 }
 
 go_dir() {
-    dir=$(_go_dir $1)
+    local dir=$(_go_dir $1)
     cd $dir
 }
 
@@ -79,7 +79,7 @@ go() {
   done
 
   # Parse optional arguments
-  OPTIND=1
+  local OPTIND=1
   while getopts ":h" opt; do
     case $opt in
       h)  Help; return 0 ;;
@@ -90,7 +90,7 @@ go() {
   done
   shift $((OPTIND-1))
 
-  command=$1
+  local command=$1
   [ -z "$command" ] || shift
 
   case "$command" in 
