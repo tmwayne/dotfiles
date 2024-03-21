@@ -6,12 +6,12 @@
 	defaultBranch = master
 [alias]
 	ctags = !.git/hooks/ctags
-	discard = checkout --
+  fadd = add -f
 	last = log -1 HEAD
   ls = ls-tree -r HEAD
-  fadd = add -f
-  plog = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %Cgreen(%cr) %C(bold blue)<%an>%Creset %s ' --abbrev-commit
+  ssl = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %Cgreen(%cr) %C(bold blue)<%an>%Creset %s ' --abbrev-commit
   purge = clean -d -f
+	revert = checkout --
   shallow-clone = clone --depth 1
   unstage = reset HEAD --
 [diff]
