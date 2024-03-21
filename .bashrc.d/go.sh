@@ -20,11 +20,11 @@ _go_list() {
 #     return 0
 # }
 
-_go_assign() {
+_go_set() {
     export $1=$(_go_dir $1)
 }
 
-_go_unassign() {
+_go_unset() {
     unset $1
 }
 
@@ -33,10 +33,10 @@ go_dir() {
     cd $dir
 }
 
-go_set() {
+go_add() {
     [ $# -eq 2 ] || return 1
     echo "$2" > $GO_DIR/$1
-    _go_assign $1
+    _go_set $1
 }
 
 go_ls() {
@@ -50,7 +50,7 @@ go_rm() {
   [ $# -gt 0 ] || return 1
   for dir in $@; do
     rm -f $GO_DIR/$dir
-    _go_unassign $dir
+    _go_unset $dir
   done
 }
 
@@ -63,7 +63,7 @@ go() {
       echo "  help                      Print this help."
       echo "  ls                        List all registered directories"
       echo "  rm <alias>                Unregister an alias"
-      echo "  set <alias> <path>        Register an alias to a directory"
+      echo "  add <alias> <path>        Register an alias to a directory"
   }
 
   # Parse optional long arguments
@@ -94,11 +94,10 @@ go() {
   [ -z "$command" ] || shift
 
   case "$command" in 
-    # add)    go_add $@ ;;
     help)   Help; return 0 ;;
-    ls)     go_ls ;;
+    add)    go_add $@ ;;
     rm)     go_rm  $@ ;;
-    set)    go_set $@ ;;
+    ls)     go_ls ;;
     *)      set -- $command $@; go_dir $@ ;;
   esac
 
@@ -111,7 +110,7 @@ go_init() {
   [ -d "$GO_DIR" ] || mkdir -p $GO_DIR
 
   for dir in $(_go_list); do
-    _go_assign $dir
+    _go_set $dir
   done
 
   # TODO: figure out how to make completion work
