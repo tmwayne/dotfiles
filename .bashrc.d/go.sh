@@ -62,8 +62,8 @@ go() {
       echo "Commands:"
       echo "  help                      Print this help."
       echo "  ls                        List all registered directories"
-      echo "  rm <alias>                Unregister an alias"
       echo "  add <alias> <path>        Register an alias to a directory"
+      echo "  rm <alias>                Unregister an alias"
   }
 
   # Parse optional long arguments
