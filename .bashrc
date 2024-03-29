@@ -10,7 +10,7 @@
 
 HISTSIZE=130000
 HISTFILESIZE=-1
-HISTTIMEFORMAT="%F %H:%M" 
+HISTTIMEFORMAT="%F %H:%M "
 HISTCONTROL=ignoredups:ignorespace:erasedups 
 shopt -s histappend
 export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
