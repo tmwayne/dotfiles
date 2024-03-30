@@ -36,7 +36,7 @@ go_dir() {
 go_add() {
     [ $# -eq 2 ] || return 1
     echo "$2" > $GO_DIR/$1
-    _go_set $1
+    _go_set $1 || (command rm $GO_DIR/$1 && return 2)
 }
 
 go_ls() {
