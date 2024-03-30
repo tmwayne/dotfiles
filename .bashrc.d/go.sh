@@ -3,40 +3,40 @@
 # https://raw.github.com/smanikarnika/etc/master/.bash_go
 
 _go_dir() {
-    local dir=$1
-    [ -f $GO_DIR/$1 ] && dir="$(cat $GO_DIR/$1)"
-    echo $dir
+  local dir=$1
+  [ -f $GO_DIR/$1 ] && dir="$(cat $GO_DIR/$1)"
+  echo $dir
 }
 
 _go_list() {
-    find $GO_DIR/ -type f | xargs -n 1 -r basename
+  find $GO_DIR/ -type f | xargs -n 1 -r basename
 }
 
-# _go_comp() {
-#     local curw
-#     COMPREPLY=()
-#     curw=${COMP_WORDS[COMP_CWORD]}
-#     COMPREPLY=($(compgen -W '$(_go_list)' -- $curw))
-#     return 0
-# }
+_go_comp() {
+  local curw
+  COMPREPLY=()
+  curw=${COMP_WORDS[COMP_CWORD]}
+  COMPREPLY=($(compgen -W '$(_go_list)' -- $curw))
+  return 0
+}
 
 _go_set() {
-    export $1=$(_go_dir $1)
+  export $1=$(_go_dir $1)
 }
 
 _go_unset() {
-    unset $1
+  unset $1
 }
 
 go_dir() {
-    local dir=$(_go_dir $1)
-    cd $dir
+  local dir=$(_go_dir $1)
+  cd $dir
 }
 
 go_add() {
-    [ $# -eq 2 ] || return 1
-    echo "$2" > $GO_DIR/$1
-    _go_set $1 || (command rm $GO_DIR/$1 && return 2)
+  [ $# -eq 2 ] || return 1
+  echo "$2" > $GO_DIR/$1
+  _go_set $1 || (command rm $GO_DIR/$1 && return 2)
 }
 
 go_ls() {
@@ -57,13 +57,13 @@ go_rm() {
 go() {
 
   Help() {
-      echo "Usage: go [<alias>|<path>]"
-      echo
-      echo "Commands:"
-      echo "  help                      Print this help."
-      echo "  ls                        List all registered directories"
-      echo "  add <alias> <path>        Register an alias to a directory"
-      echo "  rm <alias>                Unregister an alias"
+    echo "Usage: go [<alias>|<path>]"
+    echo
+    echo "Commands:"
+    echo "  help                      Print this help."
+    echo "  ls                        List all registered directories"
+    echo "  add <alias> <path>        Register an alias to a directory"
+    echo "  rm <alias>                Unregister an alias"
   }
 
   # Parse optional long arguments
@@ -72,8 +72,8 @@ go() {
     case "$arg" in
       --help)         set -- "$@" "-h" ;;
       --*)            >&2 echo "go: unrecognized option '$arg'"
-                      echo "Try 'go --help' for more information."
-                      return 2 ;;
+        echo "Try 'go --help' for more information."
+        return 2 ;;
       *)              set -- "$@" "$arg"
     esac
   done
@@ -84,8 +84,8 @@ go() {
     case $opt in
       h)  Help; return 0 ;;
       \?) >&2 echo "go: unrecognized option '-$OPTARG'"
-          echo "Try 'go --help' for more information."
-          return 2 ;;
+        echo "Try 'go --help' for more information."
+        return 2 ;;
     esac
   done
   shift $((OPTIND-1))
@@ -114,8 +114,8 @@ go_init() {
   done
 
   # TODO: figure out how to make completion work
-  # complete -o filenames -F _go_comp go
-  
+  complete -o filenames -F _go_comp go
+
   export GO_ENV_INIT=1
 }
 
