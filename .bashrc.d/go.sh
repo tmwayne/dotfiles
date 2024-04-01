@@ -12,14 +12,6 @@ _go_list() {
   find $GO_DIR/ -type f | xargs -n 1 -r basename
 }
 
-_go_comp() {
-  local curw
-  COMPREPLY=()
-  curw=${COMP_WORDS[COMP_CWORD]}
-  COMPREPLY=($(compgen -W '$(_go_list)' -- $curw))
-  return 0
-}
-
 _go_set() {
   export $1=$(_go_dir $1)
 }
@@ -112,9 +104,6 @@ go_init() {
   for dir in $(_go_list); do
     _go_set $dir
   done
-
-  # TODO: figure out how to make completion work
-  complete -o filenames -F _go_comp go
 
   export GO_ENV_INIT=1
 }
