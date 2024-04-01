@@ -17,12 +17,12 @@ shload "colors.sh"
 
 # adding error code to output
 # https://stackoverflow.com/a/61740213
-exitstatus() {
+_exitstatus() {
   code=${?##0}
   echo -n ${code:+"[$code] "}
 }
 
-basedir() {
+_basedir() {
   echo -n $(basename $PWD)
 }
 
@@ -33,8 +33,8 @@ command -v _scm_prompt >/dev/null || alias _scm_prompt=""
 # the command line length calculation, hence line wrapping
 # https://meta.superuser.com/a/3292
 _sign_="\$ "
-_exitstatus_="\[$YELLOW\]\$(exitstatus)\[$ENDCLR\]"
-_basedir_="\[$LIGHT_GREEN\]\$(basedir)\[$ENDCLR\]"
+_exitstatus_="\[$YELLOW\]\$(_exitstatus)\[$ENDCLR\]"
+_basedir_="\[$LIGHT_GREEN\]\$(_basedir)\[$ENDCLR\]"
 _scm_="\[$LIGHT_PURPLE\]\$(_scm_prompt)\[$ENDCLR\]"
 
 export PS1="$_exitstatus_$_basedir_$_scm_$_sign_"
