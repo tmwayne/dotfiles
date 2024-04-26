@@ -20,21 +20,21 @@ cs() {
   USAGE="Usage: cs [-e] cheatsheet"
 
   HELP="\
-  $USAGE
-  It's not cheating if you don't get caught..
+$USAGE
+It's not cheating if you don't get caught..
 
-  Options:
-    -e, --edit                Edit a cheatsheet
-    -l, --list                List cheatsheets
-    -h, --help                Print this help
-    -V, --version             Print version info"
+Options:
+  -e, --edit                Edit a cheatsheet
+  -l, --list                List cheatsheets
+  -h, --help                Print this help
+  -V, --version             Print version info"
 
   VERSION="\
-  Cheatsheets v1.0.0
-  Copyright (c) 2022 Tyler Wayne
-  Licensed under the Apache License, Version 2.0
+Cheatsheets v1.0.0
+Copyright (c) 2022 Tyler Wayne
+Licensed under the Apache License, Version 2.0
 
-  Written by Tyler Wayne."
+Written by Tyler Wayne."
 
   # Arguments --------------------------------------------------------------------
 

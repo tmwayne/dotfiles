@@ -20,19 +20,19 @@ notes() {
   USAGE="Usage: notes note [...]"
 
   HELP="\
-  $USAGE
-  Edit your notes without the hassle of finding them.
+$USAGE
+Edit your notes without the hassle of finding them.
 
-  Options:
-    -h, --help                Print this help.
-    -V, --version             Print version info."
+Options:
+  -h, --help                Print this help.
+  -V, --version             Print version info."
 
   VERSION="\
-  Notes v1.0.0
-  Copyright (c) 2022 Tyler Wayne
-  Licensed under the Apache License, Version 2.0
+Notes v1.0.0
+Copyright (c) 2022 Tyler Wayne
+Licensed under the Apache License, Version 2.0
 
-  Written by Tyler Wayne."
+Written by Tyler Wayne."
 
   # Arguments ------------------------------------------------------------------
 
