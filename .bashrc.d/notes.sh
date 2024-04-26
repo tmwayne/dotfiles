@@ -21,7 +21,7 @@ notes() {
 
   HELP="\
 $USAGE
-Edit your notes without the hassle of finding them.
+Never lose your notes again..
 
 Options:
   -h, --help                Print this help.
