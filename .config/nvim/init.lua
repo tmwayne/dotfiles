@@ -8,7 +8,7 @@
 
 -- :help nvim-defaults
 vim.g.mapleader = '\\'
--- vim.g.colorscheme = 'desert'
+vim.cmd [[ colorscheme vim ]]
 vim.opt.swapfile = false
 vim.opt.cursorline = true
 vim.opt.list = false
