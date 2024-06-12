@@ -61,5 +61,5 @@ source-sh() {
   for f in "$@"; do source $f; done
 }
 
-[ -d ~/.bashrc.d ] && source-sh $(find ~/.bashrc.d -name '*.sh')
-[ -d ~/.bash_aliases.d ] && source-sh $(find ~/.bash_aliases.d -name '*.sh')
+[ -d ~/.bashrc.d ] && source-sh $(find ~/.bashrc.d -name '*.sh' | sort)
+[ -d ~/.bash_aliases.d ] && source-sh $(find ~/.bash_aliases.d -name '*.sh' | sort)
