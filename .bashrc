@@ -57,9 +57,9 @@ alias mkenv='python3 -m venv .env-py'
 
 # other sources ----------------------------------------------------------------
 
-source-sh() {
-  for f in "$@"; do source $f; done
+source-dir() {
+  for f in $(find $1 -name '*.sh' | sort); do source $f; done
 }
 
-[ -d ~/.bashrc.d ] && source-sh $(find ~/.bashrc.d -name '*.sh' | sort)
-[ -d ~/.bash_aliases.d ] && source-sh $(find ~/.bash_aliases.d -name '*.sh' | sort)
+[ -d ~/.bashrc.d ] && source-dir ~/.bashrc.d
+[ -d ~/.bash_aliases.d ] && source-dir ~/.bash_aliases.d
