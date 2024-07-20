@@ -17,10 +17,10 @@
 
 cs() {
 
-  USAGE="Usage: cs [-e] cheatsheet"
+  usage="Usage: cs [-e] cheatsheet"
 
-  HELP="\
-$USAGE
+  help="\
+$usage
 It's not cheating if you don't get caught..
 
 Options:
@@ -29,7 +29,7 @@ Options:
   -h, --help                Print this help
   -V, --version             Print version info"
 
-  VERSION="\
+  version="\
 Cheatsheets v1.0.0
 Copyright (c) 2022 Tyler Wayne
 Licensed under the Apache License, Version 2.0
@@ -64,9 +64,9 @@ Written by Tyler Wayne."
   while getopts ":ehlV" opt; do
     case $opt in
       e)  action="edit" ;;
-      h)  echo "$HELP"; return 0 ;;
+      h)  echo "$help"; return 0 ;;
       l)  action="list" ;;
-      V)  echo "$VERSION"; return 0 ;;
+      V)  echo "$version"; return 0 ;;
       \?) echo "cs: unrecognized option '-$OPTARG'" >&2
           echo "Try 'cs --help' for more information."
           return 2 ;;
@@ -82,7 +82,7 @@ Written by Tyler Wayne."
   # TODO: if file doesn't exist, copy a cheatsheet template and open that.
   edit() {
     if [ $nargs -lt 1 ]; then
-      echo $USAGE
+      echo $usage
       return 1
     fi
     mkdir -p $(dirname $cs)
