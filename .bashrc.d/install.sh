@@ -15,8 +15,8 @@ Options:
   -c, --copy                Install a copy instead of a symlink.
   -h, --help                Print this help.
   -i, --install-dir=DIR     Directory program is installed in.
-  -f, --force               Force overwrite if already exists.
                             Defaults to ~/.local/bin
+  -f, --force               Force overwrite if already exists.
   -n, --name=NAME           Name to install program as."
 
   ## ARGUMENTS
