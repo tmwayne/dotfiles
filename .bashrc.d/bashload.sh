@@ -1,7 +1,7 @@
 # .bashload.sh
 # Try to load file from a set of directories
 
-[ -z "$SHPATH" ] && export SHPATH=$HOME/.bash_aliases.d:$HOME/.bashrc.d
+[ -z "$SHPATH" ] && export SHPATH=$HOME/.bashrc.d
 
 shload() {
   [ -z "$SHPATH" ] && return 1                      # path can't be empty
