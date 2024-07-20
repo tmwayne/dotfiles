@@ -61,5 +61,5 @@ source-dir() {
   for f in $(find $1 -name '*.sh' | sort); do source $f; done
 }
 
-[ -d ~/.bashrc.d ] && source-dir ~/.bashrc.d
-[ -d ~/.bash_aliases.d ] && source-dir ~/.bash_aliases.d
+[ -d ~/.bashrc.d ] && source-dir ~/.bashrc.d || true
+[ -d ~/.bash_aliases.d ] && source-dir ~/.bash_aliases.d || true
