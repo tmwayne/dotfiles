@@ -8,7 +8,8 @@
 
 -- :help nvim-defaults
 vim.g.mapleader = '\\'
-vim.cmd [[ colorscheme vim ]]
+vim.opt.background = 'dark'
+-- vim.cmd [[ colorscheme vim ]]
 vim.opt.swapfile = false
 vim.opt.cursorline = true
 vim.opt.list = false
