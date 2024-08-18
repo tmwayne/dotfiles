@@ -41,6 +41,8 @@ Written by Tyler Wayne."
     return 1
   fi
 
+  local arg
+
   # Command-line arguments
   for arg in "$@"; do
     shift
@@ -66,6 +68,7 @@ Written by Tyler Wayne."
   done
   shift $((OPTIND-1))
 
+  local notes_dir args notes
 
   notes_dir=${NOTES_DIR:-$HOME/.notes/}
 
