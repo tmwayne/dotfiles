@@ -26,6 +26,10 @@ vim.opt.tabstop = 2
 vim.opt.shiftwidth = 2
 vim.opt.softtabstop = 2
 
+vim.g.netrw_preview = 1 -- split horizontally
+vim.g.netrw_alto = 0 -- split to the right
+vim.g.netrw_banner = 0
+
 -- is this needed?
 vim.cmd [[
   packadd! matchit " For increased functionality of %
