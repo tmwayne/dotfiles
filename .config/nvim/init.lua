@@ -1,15 +1,9 @@
 -- init.lua
 
--- Plugins to check out
--- - which-key.nvim : displays a popup with possible key bindings of the
---   command you started typing
--- - bufferline.nvim : buffer management
--- - flash.nvim : quickly jump around your files
-
 -- :help nvim-defaults
 vim.g.mapleader = '\\'
 vim.opt.background = 'dark'
--- vim.cmd [[ colorscheme vim ]]
+vim.cmd [[ colorscheme vim ]]
 vim.opt.swapfile = false
 vim.opt.cursorline = true
 vim.opt.list = false
