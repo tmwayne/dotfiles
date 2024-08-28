@@ -3,7 +3,7 @@
 -- :help nvim-defaults
 vim.g.mapleader = '\\'
 vim.opt.background = 'dark'
-vim.cmd [[ colorscheme vim ]]
+vim.cmd.colorscheme('vim')
 vim.opt.swapfile = false
 vim.opt.cursorline = true
 vim.opt.list = false
@@ -24,13 +24,10 @@ vim.opt.softtabstop = 2
 -- vim.g.netrw_alto = 0 -- split to the right
 -- vim.g.netrw_banner = 0
 
--- is this needed?
-vim.cmd [[
-  packadd! matchit " For increased functionality of %
-  packadd! termdebug
-  packloadall " load all plugins now
-  silent! helptags ALL
-]]
+vim.cmd.helptags('ALL')
+-- vim.cmd [[
+--   silent! helptags ALL
+-- ]]
 
 -- not sure if this is needed for neovim
 -- the url parser for gx has bug, remap to this per
@@ -51,3 +48,6 @@ vim.keymap.set('n', ']n', ':tabprevious<cr>', {silent = true})
 vim.keymap.set('i', '<c-u>', '<esc>gUiwea', {desc = 'Capitalize word'})
 vim.keymap.set('n', 'L', 'o<esc>', {desc = 'Insert blank line'})
 vim.keymap.set('i', '<c-f>', '<c-x><c-f>', {desc = 'Tab completion'})
+
+
+
