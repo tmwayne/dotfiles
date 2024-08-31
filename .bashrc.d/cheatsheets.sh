@@ -15,6 +15,8 @@
 # limitations under the License.
 #
 
+CHEATSHEETS_DIR=${CHEATSHEETS_DIR:-$HOME/.cheatsheets}
+
 cs() {
 
   usage="Usage: cs [-e] cheatsheet"
@@ -36,14 +38,9 @@ Licensed under the Apache License, Version 2.0
 
 Written by Tyler Wayne."
 
-  # Arguments --------------------------------------------------------------------
-
   # Default args
   default="cheat"
   action=$default
-
-  # Environment variables
-  cs_dir=${CHEATSHEETS_DIR:-$HOME/.cheatsheets}
 
   # Command-line arguments
   for arg in "$@"; do
@@ -74,10 +71,8 @@ Written by Tyler Wayne."
   done
   shift $((OPTIND-1))
 
-  cs=$cs_dir/$1.txt
+  cs=$CHEATSHEETS_DIR/$1.txt
   nargs=$#
-
-  # Main -------------------------------------------------------------------------
 
   # TODO: if file doesn't exist, copy a cheatsheet template and open that.
   edit() {
@@ -108,7 +103,7 @@ Written by Tyler Wayne."
 
   list() {
     # Strip dirname and suffix
-    ls $cs_dir/*.txt | sed 's#.*/\(.*\)\..*#\1#'
+    ls $CHEATSHEETS_DIR/*.txt | sed 's#.*/\(.*\)\..*#\1#'
   }
 
   case "$action" in 
@@ -119,3 +114,25 @@ Written by Tyler Wayne."
   esac
 
 }
+
+# Tab completion ---------------------------------------------------------------
+
+_cs_options() {
+  # matches ./dir/filename.ext and outputs dir/filename
+  # ignores hidden files and directories
+  (cd $CHEATSHEETS_DIR && \
+    find . -not -path './.*' -type f \
+      | perl -nle 'print $1 if m@./(.+)\.\S+@')
+  
+}
+
+_cs_completion() {
+  local cur
+  COMPREPLY=()
+  cur="${COMP_WORDS[COMP_CWORD]}"
+  COMPREPLY=($(compgen -W "$(_cs_options)" -- $cur))
+  return 0
+}
+
+complete -o bashdefault -F _cs_completion cs
+
