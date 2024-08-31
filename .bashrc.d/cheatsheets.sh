@@ -101,9 +101,11 @@ Written by Tyler Wayne."
     fi
   }
 
+  # TODO: consolidate this with _cs_options shell function
   list() {
-    # Strip dirname and suffix
-    ls $CHEATSHEETS_DIR/*.txt | sed 's#.*/\(.*\)\..*#\1#'
+    (cd $CHEATSHEETS_DIR && \
+      find . -not -path './.*' -type f \
+        | perl -nle 'print $1 if m@./(.+)\.\S+@')
   }
 
   case "$action" in 
