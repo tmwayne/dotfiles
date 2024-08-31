@@ -89,8 +89,10 @@ Written by Tyler Wayne."
 
 _notes_options() {
   # matches ./dir/filename.ext and outputs dir/filename
-  # TODO: currently this matches files like ./.git/objects/../. Remove these
-  (cd $NOTES_DIR && find . -type f | perl -nle 'print $1 if m@./(.+)\.\S+@')
+  # ignores hidden files and directories
+  (cd $NOTES_DIR && \
+    find . -not -path './.*' -type f \
+      | perl -nle 'print $1 if m@./(.+)\.\S+@')
   
 }
 
