@@ -89,19 +89,18 @@ Written by Tyler Wayne."
 
 _notes_options() {
   # matches ./dir/filename.ext and outputs dir/filename
+  # TODO: currently this matches files like ./.git/objects/../. Remove these
   (cd $NOTES_DIR && find . -type f | perl -nle 'print $1 if m@./(.+)\.\S+@')
   
 }
 
-# TODO: this is returning more options that would be expected
-# For example notes ma<tab> returns options that don't start with ma
 _notes_completion() {
   local cur
   COMPREPLY=()
   cur="${COMP_WORDS[COMP_CWORD]}"
-  COMPREPLY=($(compgen -W '$(_notes_options)' -- $cur))
+  COMPREPLY=($(compgen -W "$(_notes_options)" -- $cur))
   return 0
 }
 
-complete -o filenames -F _notes_completion notes
+complete -o bashdefault -F _notes_completion notes
 
