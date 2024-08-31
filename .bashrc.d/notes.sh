@@ -14,6 +14,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+#
+
+NOTES_DIR=${NOTES_DIR:-$HOME/.notes/}
 
 notes() {
 
@@ -33,8 +36,6 @@ Copyright (c) 2022 Tyler Wayne
 Licensed under the Apache License, Version 2.0
 
 Written by Tyler Wayne."
-
-  # Arguments ------------------------------------------------------------------
 
   if [ $# -lt 1 ]; then
     echo $USAGE
@@ -68,15 +69,13 @@ Written by Tyler Wayne."
   done
   shift $((OPTIND-1))
 
-  local notes_dir args notes
+  local args notes
 
-  notes_dir=${NOTES_DIR:-$HOME/.notes/}
+  NOTES_DIR=${NOTES_DIR:-$HOME/.notes/}
 
   args=($@) # Accept a list of notes
-  notes=(${args[@]/#/$notes_dir})
+  notes=(${args[@]/#/$NOTES_DIR})
   notes=${notes[@]/%/.txt}
-
-  # Main -----------------------------------------------------------------------
 
   if [ -z "$EDITOR" ]; then
     echo "Error: EDITOR not set"
@@ -85,3 +84,24 @@ Written by Tyler Wayne."
   $EDITOR $notes # Create a new note if one isn't found
 
 }
+
+# Tab completion ---------------------------------------------------------------
+
+_notes_options() {
+  # matches ./dir/filename.ext and outputs dir/filename
+  (cd $NOTES_DIR && find . -type f | perl -nle 'print $1 if m@./(.+)\.\S+@')
+  
+}
+
+# TODO: this is returning more options that would be expected
+# For example notes ma<tab> returns options that don't start with ma
+_notes_completion() {
+  local cur
+  COMPREPLY=()
+  cur="${COMP_WORDS[COMP_CWORD]}"
+  COMPREPLY=($(compgen -W '$(_notes_options)' -- $cur))
+  return 0
+}
+
+complete -o filenames -F _notes_completion notes
+
