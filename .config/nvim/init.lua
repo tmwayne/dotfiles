@@ -2,19 +2,16 @@
 
 -- :help nvim-defaults
 vim.g.mapleader = '\\'
-vim.opt.background = 'dark'
 vim.cmd.colorscheme('vim')
 vim.opt.swapfile = false
 vim.opt.cursorline = true
-vim.opt.list = false
-vim.opt.wrap = true
 vim.opt.linebreak = true
-vim.opt.splitright = true -- open new tables below
-vim.opt.splitbelow = true -- or to the right
+vim.opt.splitright = true
+vim.opt.splitbelow = true
 vim.opt.foldlevelstart = 0
 vim.opt.completeopt = 'menuone,preview'
 vim.opt.path:append '**'
-vim.opt.hlsearch = false -- no highlight search
+vim.opt.hlsearch = false
 vim.opt.expandtab = true
 vim.opt.tabstop = 2
 vim.opt.shiftwidth = 2
@@ -48,6 +45,3 @@ vim.keymap.set('n', ']n', ':tabprevious<cr>', {silent = true})
 vim.keymap.set('i', '<c-u>', '<esc>gUiwea', {desc = 'Capitalize word'})
 vim.keymap.set('n', 'L', 'o<esc>', {desc = 'Insert blank line'})
 vim.keymap.set('i', '<c-f>', '<c-x><c-f>', {desc = 'Tab completion'})
-
-
-
