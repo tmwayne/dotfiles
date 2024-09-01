@@ -17,6 +17,15 @@
 
 CHEATSHEETS_DIR=${CHEATSHEETS_DIR:-$HOME/.cheatsheets}
 
+# matches ./dir/filename.ext and outputs dir/filename
+# ignores hidden files and directories
+_cs_list() {
+  (cd $CHEATSHEETS_DIR && \
+    find . -not -path './.*' -type f \
+      | perl -nle 'print $1 if m@./(.+)\.\S+@')
+  
+}
+
 cs() {
 
   usage="Usage: cs [-e] cheatsheet"
@@ -101,17 +110,10 @@ Written by Tyler Wayne."
     fi
   }
 
-  # TODO: consolidate this with _cs_options shell function
-  list() {
-    (cd $CHEATSHEETS_DIR && \
-      find . -not -path './.*' -type f \
-        | perl -nle 'print $1 if m@./(.+)\.\S+@')
-  }
-
   case "$action" in 
-    edit)   edit  ;;
-    cheat)  cheat ;;
-    list)   list  ;;
+    edit)   edit      ;;
+    cheat)  cheat     ;;
+    list)   _cs_list  ;;
     *)     echo "Error: action not recognized"; return 3 ;;
   esac
 
@@ -119,20 +121,11 @@ Written by Tyler Wayne."
 
 # Tab completion ---------------------------------------------------------------
 
-_cs_options() {
-  # matches ./dir/filename.ext and outputs dir/filename
-  # ignores hidden files and directories
-  (cd $CHEATSHEETS_DIR && \
-    find . -not -path './.*' -type f \
-      | perl -nle 'print $1 if m@./(.+)\.\S+@')
-  
-}
-
 _cs_completion() {
   local cur
   COMPREPLY=()
   cur="${COMP_WORDS[COMP_CWORD]}"
-  COMPREPLY=($(compgen -W "$(_cs_options)" -- $cur))
+  COMPREPLY=($(compgen -W "$(_cs_list)" -- $cur))
   return 0
 }
 
