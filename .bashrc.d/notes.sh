@@ -18,6 +18,15 @@
 
 NOTES_DIR=${NOTES_DIR:-$HOME/.notes/}
 
+_notes_list() {
+  # matches ./dir/filename.ext and outputs dir/filename
+  # ignores hidden files and directories
+  (cd $NOTES_DIR && \
+    find . -not -path './.*' -type f \
+      | perl -nle 'print $1 if m@./(.+)\.\S+@')
+  
+}
+
 notes() {
 
   USAGE="Usage: notes note [...]"
@@ -27,8 +36,9 @@ $USAGE
 Never lose 'em again..
 
 Options:
-  -h, --help                Print this help.
-  -V, --version             Print version info."
+  -h, --help                Print this help
+  -l, --list                List notes
+  -V, --version             Print version info"
 
   VERSION="\
 Notes v1.0.0
@@ -49,6 +59,7 @@ Written by Tyler Wayne."
     shift
     case "$arg" in
       --help)         set -- "$@" "-h" ;;
+      --list)         set -- "$@" "-l" ;;
       --version)      set -- "$@" "-V" ;;
       --*)            echo "notes: unrecognized option '$arg'" >&2
                       echo "Try 'notes --help' for more information."
@@ -58,9 +69,10 @@ Written by Tyler Wayne."
   done
 
   OPTIND=1
-  while getopts ":hV" opt; do
+  while getopts ":hlV" opt; do
     case $opt in
       h)  echo "$HELP"; return 0 ;;
+      l)  _notes_list; return 0 ;;
       V)  echo "$VERSION"; return 0 ;;
       \?) echo "notes: unrecognized option '-$OPTARG'" >&2
           echo "Try 'notes --help' for more information."
@@ -87,20 +99,11 @@ Written by Tyler Wayne."
 
 # Tab completion ---------------------------------------------------------------
 
-_notes_options() {
-  # matches ./dir/filename.ext and outputs dir/filename
-  # ignores hidden files and directories
-  (cd $NOTES_DIR && \
-    find . -not -path './.*' -type f \
-      | perl -nle 'print $1 if m@./(.+)\.\S+@')
-  
-}
-
 _notes_completion() {
   local cur
   COMPREPLY=()
   cur="${COMP_WORDS[COMP_CWORD]}"
-  COMPREPLY=($(compgen -W "$(_notes_options)" -- $cur))
+  COMPREPLY=($(compgen -W "$(_notes_list)" -- $cur))
   return 0
 }
 
