@@ -28,9 +28,9 @@ _cs_list() {
 
 cs() {
 
-  usage="Usage: cs [-e] cheatsheet"
+  local usage="Usage: cs [-e] cheatsheet"
 
-  help="\
+  local help="\
 $usage
 It's not cheating if you don't get caught..
 
@@ -40,7 +40,7 @@ Options:
   -h, --help                Print this help
   -V, --version             Print version info"
 
-  version="\
+  local version="\
 Cheatsheets v1.0.0
 Copyright (c) 2022 Tyler Wayne
 Licensed under the Apache License, Version 2.0
@@ -48,10 +48,11 @@ Licensed under the Apache License, Version 2.0
 Written by Tyler Wayne."
 
   # Default args
-  default="cheat"
-  action=$default
+  local default="cheat"
+  local action=$default
 
   # Command-line arguments
+  local arg
   for arg in "$@"; do
     shift
     case "$arg" in
@@ -80,11 +81,13 @@ Written by Tyler Wayne."
   done
   shift $((OPTIND-1))
 
+  local cs nargs
+
   cs=$CHEATSHEETS_DIR/$1.txt
   nargs=$#
 
   # TODO: if file doesn't exist, copy a cheatsheet template and open that.
-  edit() {
+  _cs_edit() {
     if [ $nargs -lt 1 ]; then
       echo $usage
       return 1
@@ -93,13 +96,14 @@ Written by Tyler Wayne."
     $EDITOR $cs
   }
 
-  cheat() {
+  _cs_cheat() {
     if [ -f "$cs" ]; then
       # On OSX, leading white space is added to wc output. Use awk to remove it.
-      file_length=`wc -l $cs | awk '{$1=$1}1' | cut -d' ' -f1`
-      term_length=`tput lines`
+      local file_length=`wc -l $cs | awk '{$1=$1}1' | cut -d' ' -f1`
+      local term_length=`tput lines`
 
       # Page the cheatsheet if it's longer than the terminal
+      local output_pager
       if [ $file_length -gt $term_length ] && [ -n "$PAGER" ]; then
         output_pager=$PAGER
       else
@@ -111,8 +115,8 @@ Written by Tyler Wayne."
   }
 
   case "$action" in 
-    edit)   edit      ;;
-    cheat)  cheat     ;;
+    edit)   _cs_edit  ;;
+    cheat)  _cs_cheat ;;
     list)   _cs_list  ;;
     *)     echo "Error: action not recognized"; return 3 ;;
   esac
@@ -122,9 +126,8 @@ Written by Tyler Wayne."
 # Tab completion ---------------------------------------------------------------
 
 _cs_completion() {
-  local cur
   COMPREPLY=()
-  cur="${COMP_WORDS[COMP_CWORD]}"
+  local cur="${COMP_WORDS[COMP_CWORD]}"
   COMPREPLY=($(compgen -W "$(_cs_list)" -- $cur))
   return 0
 }
