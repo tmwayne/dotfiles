@@ -45,3 +45,5 @@ vim.keymap.set('n', ']n', ':tabprevious<cr>', {silent = true})
 vim.keymap.set('i', '<c-u>', '<esc>gUiwea', {desc = 'Capitalize word'})
 vim.keymap.set('n', 'L', 'o<esc>', {desc = 'Insert blank line'})
 vim.keymap.set('i', '<c-f>', '<c-x><c-f>', {desc = 'Tab completion'})
+
+vim.keymap.set('n', '<leader>sp', ':set paste!<cr>', {desc = 'Toggle paste'})
