@@ -17,10 +17,6 @@ vim.opt.tabstop = 2
 vim.opt.shiftwidth = 2
 vim.opt.softtabstop = 2
 
--- vim.g.netrw_preview = 1 -- split horizontally
--- vim.g.netrw_alto = 0 -- split to the right
--- vim.g.netrw_banner = 0
-
 vim.cmd.helptags('ALL')
 -- vim.cmd [[
 --   silent! helptags ALL
@@ -31,11 +27,18 @@ vim.cmd.helptags('ALL')
 -- https://github.com/vim/vim/issues/4738#issuecomment-521506447
 -- nmap gx yiW:!open <cWORD><CR> <C-r>" & <CR><CR>
 
-vim.keymap.set('n', 'gk', 'K', {desc = "Runs the program given by 'keywordprg'"})
-vim.keymap.set('n', 'K', 'k')
+-- vim.keymap.set('n', 'gk', 'K', {desc = "Runs the program given by 'keywordprg'"})
+-- vim.keymap.set('n', 'K', 'k')
 vim.keymap.set('v', 'K', 'k')
 vim.keymap.set('n', 'J', 'j')
 vim.keymap.set('v', 'J', 'j')
+
+-- yanking to and pasting from system clipboard
+vim.keymap.set('v', 'gy', '"+y', {desc = "Yank to system clipboard"})
+vim.keymap.set('n', 'gy', '"+y', {desc = "Yank to system clipboard"})
+vim.keymap.set('n', 'gyy', '"+yy', {desc = "Yank to system clipboard"})
+vim.keymap.set('n', 'gp' , '"+p', {desc = "Paste from system clipboard"})
+vim.keymap.set('n', 'gP' , '"+P', {desc = "Paste from system clipboard"})
 
 vim.keymap.set('n', '[b', ':bnext<cr>', {silent = true})
 vim.keymap.set('n', ']b', ':bprevious<cr>', {silent = true})
