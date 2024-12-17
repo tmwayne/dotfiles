@@ -81,25 +81,29 @@ Written by Tyler Wayne."
   done
   shift $((OPTIND-1))
 
-  local cs nargs
+  local cs_name cs_path nargs
 
-  cs=$CHEATSHEETS_DIR/$1.txt
+  cs_name=$1
+  cs_path=$CHEATSHEETS_DIR/$cs_name.txt
   nargs=$#
 
-  # TODO: if file doesn't exist, copy a cheatsheet template and open that.
   _cs_edit() {
-    if [ $nargs -lt 1 ]; then
+    if [ $nargs -ne 1 ]; then
       echo $usage
       return 1
     fi
-    mkdir -p $(dirname $cs)
-    $EDITOR $cs
+    mkdir -p $CHEATSHEETS_DIR
+    if [ ! -f "$cs_path" ]; then
+      echo "cs: no cheatsheet named $cs_name" >&2
+      return 3;
+    fi
+    $EDITOR $cs_path
   }
 
   _cs_cheat() {
-    if [ -f "$cs" ]; then
+    if [ -f "$cs_path" ]; then
       # On OSX, leading white space is added to wc output. Use awk to remove it.
-      local file_length=`wc -l $cs | awk '{$1=$1}1' | cut -d' ' -f1`
+      local file_length=`wc -l $cs_path | awk '{$1=$1}1' | cut -d' ' -f1`
       local term_length=`tput lines`
 
       # Page the cheatsheet if it's longer than the terminal
@@ -110,15 +114,15 @@ Written by Tyler Wayne."
         output_pager=cat
       fi
 
-      $output_pager $cs
+      $output_pager $cs_path
     fi
   }
 
   case "$action" in 
     edit)   _cs_edit  ;;
-    cheat)  _cs_cheat ;;
     list)   _cs_list  ;;
-    *)     echo "Error: action not recognized"; return 3 ;;
+    cheat)  _cs_cheat ;;
+    *)     echo "Error: action not recognized"; return 4 ;;
   esac
 
 }
