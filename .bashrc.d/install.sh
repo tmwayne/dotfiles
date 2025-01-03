@@ -63,7 +63,7 @@ Options:
   local target="$install_dir"/$prog_name
   local tmp="$target".tmp
 
-  if [ $# -lt 1 ]; then
+  if (( $# < 1 )); then
     echo $usage
     return 1
   fi
@@ -100,15 +100,15 @@ Options:
   if [ "$copy" == y ]; then
     if cp "$file_name" "$tmp"; then successful_install=y; fi
   else
-    ## ln returns an exit code of 0 even if the link it creates is broken
-    ## we ensure that the link it create works
+    # ln returns an exit code of 0 even if the link it creates is broken
+    # we ensure that the link it create works
     if ln -s "$file_name" "$tmp" && realpath "$tmp" &> /dev/null; then
       successful_install=y;
     fi
   fi
 
   if [ "$successful_install" == y ]; then
-    echo "Successfully installed $prog_name!"
+    # echo "Successfully installed $prog_name!"
     mv "$tmp" "$target"
   else
     echo "$this_prog: error: failed to install $prog_name ..." >&2
@@ -165,14 +165,12 @@ Options:
   local prog_name=$1
   local target="$install_dir"/$prog_name
 
-  if [ $# -lt 1 ]; then
+  if (( $# < 1 )); then
     echo $usage
     return 1
   fi
 
-  if rm -f "$target"; then
-    echo "Successfully uninstalled $prog_name!"
-  else
+  if ! rm -f "$target"; then
     echo "$this_prog: error: unable to uninstall $prog_name ..." >&2
   fi
 
