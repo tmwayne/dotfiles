@@ -48,15 +48,16 @@ go_rm() {
 
 go() {
 
-  Help() {
-    echo "Usage: go [<alias>|<path>]"
-    echo
-    echo "Commands:"
-    echo "  help                      Print this help."
-    echo "  ls                        List all registered directories"
-    echo "  add <alias> <path>        Register an alias to a directory"
-    echo "  rm <alias>                Unregister an alias"
-  }
+  local usage="Usage: go [<alias>|<path>]"
+
+  local help="\
+$usage
+
+Commands:
+  help                      Print this help.
+  ls                        List all registered directories
+  add <alias> <path>        Register an alias to a directory
+  rm  <alias>               Unregister an alias"
 
   # Parse optional long arguments
   local arg
@@ -76,7 +77,7 @@ go() {
   local opt
   while getopts ":h" opt; do
     case $opt in
-      h)  Help; return 0 ;;
+      h)  echo -e "$help"; return 0 ;;
       \?) >&2 echo "go: unrecognized option '-$OPTARG'"
         echo "Try 'go --help' for more information."
         return 2 ;;
@@ -88,7 +89,7 @@ go() {
   [ -z "$command" ] || shift
 
   case "$command" in 
-    help)   Help; return 0 ;;
+    help)   echo -e "$help"; return 0 ;;
     add)    go_add $@ ;;
     rm)     go_rm  $@ ;;
     ls)     go_ls ;;
