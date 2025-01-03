@@ -58,6 +58,7 @@ alias mkenv='python3 -m venv .env-py'
 # other sources ----------------------------------------------------------------
 
 source-dir() {
+  local f
   for f in $(find $1 -name '*.sh' | sort); do source $f; done
 }
 
