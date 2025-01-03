@@ -67,7 +67,8 @@ Written by Tyler Wayne."
     esac
   done
 
-  OPTIND=1
+  local OPTIND=1
+  local opt
   while getopts ":ehlV" opt; do
     case $opt in
       e)  action="edit" ;;
@@ -81,11 +82,9 @@ Written by Tyler Wayne."
   done
   shift $((OPTIND-1))
 
-  local cs_name cs_path nargs
-
-  cs_name=$1
-  cs_path=$CHEATSHEETS_DIR/$cs_name.txt
-  nargs=$#
+  local cs_name=$1
+  local cs_path=$CHEATSHEETS_DIR/$cs_name.txt
+  local nargs=$#
 
   _cs_edit() {
     if [ $nargs -ne 1 ]; then
