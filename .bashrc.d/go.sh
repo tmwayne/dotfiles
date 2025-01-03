@@ -59,6 +59,7 @@ go() {
   }
 
   # Parse optional long arguments
+  local arg
   for arg in "$@"; do
     shift
     case "$arg" in
@@ -72,6 +73,7 @@ go() {
 
   # Parse optional arguments
   local OPTIND=1
+  local opt
   while getopts ":h" opt; do
     case $opt in
       h)  Help; return 0 ;;

@@ -27,11 +27,12 @@ export ENDCLR="\e[0m"
 # out of 17 (default + 16 escapes), followed by a test use of that color 
 # on all nine background colors (default + 8 escapes).
 test-colors() {
-  T='gYw'   # The test text
+  local T='gYw'   # The test text
 
   echo -e "\n                 40m     41m     42m     43m\
      44m     45m     46m     47m";
 
+  local FGs BG
   for FGs in '    m' '   1m' '  30m' '1;30m' '  31m' '1;31m' '  32m' \
              '1;32m' '  33m' '1;33m' '  34m' '1;34m' '  35m' '1;35m' \
              '  36m' '1;36m' '  37m' '1;37m';

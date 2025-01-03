@@ -4,7 +4,7 @@
 
 install-sh() {
 
-  local this_prog=$( basename $FUNCNAME )
+  local this_prog=${FUNCNAME##*/}
   local usage="Usage: $this_prog [-f] [-i install_dir] [-n prog_name] file_name"
 
   local help="\
@@ -120,7 +120,7 @@ Options:
 
 uninstall-sh() {
 
-  local this_prog=$( basename $FUNCNAME )
+  local this_prog=${FUNCNAME##*/}
   local usage="Usage: $this_prog [-i install_dir] prog_name"
 
   local help="\

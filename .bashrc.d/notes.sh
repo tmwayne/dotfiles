@@ -44,7 +44,7 @@ Licensed under the Apache License, Version 2.0
 
 Written by Tyler Wayne."
 
-  if [ $# -lt 1 ]; then
+  if (( $# < 1 )); then
     echo $usage
     return 1
   fi
@@ -64,7 +64,8 @@ Written by Tyler Wayne."
     esac
   done
 
-  OPTIND=1
+  local OPTIND=1
+  local opt
   while getopts ":hlV" opt; do
     case $opt in
       h)  echo "$help"; return 0 ;;
