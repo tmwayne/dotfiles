@@ -1,6 +1,6 @@
 #!/bin/bash
 # cheatsheets.sh
-# Copyright (c) 2022 Tyler Wayne
+# Copyright (c) 2024 Tyler Wayne
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -42,7 +42,7 @@ Options:
 
   local version="\
 Cheatsheets v1.0.0
-Copyright (c) 2022 Tyler Wayne
+Copyright (c) 2024 Tyler Wayne
 Licensed under the Apache License, Version 2.0
 
 Written by Tyler Wayne."
@@ -61,7 +61,7 @@ Written by Tyler Wayne."
       --help)         set -- "$@" "-h" ;;
       --version)      set -- "$@" "-V" ;;
       --*)            echo "cs: unrecognized option '$arg'" >&2
-                      echo "Try 'cs --help' for more information."
+                      echo "Try 'cs --help' for more information." >&2
                       return 2 ;;
       *)              set -- "$@" "$arg"
     esac
@@ -75,7 +75,7 @@ Written by Tyler Wayne."
       l)  action="list" ;;
       V)  echo "$version"; return 0 ;;
       \?) echo "cs: unrecognized option '-$OPTARG'" >&2
-          echo "Try 'cs --help' for more information."
+          echo "Try 'cs --help' for more information." >&2
           return 2 ;;
     esac
   done
@@ -101,28 +101,28 @@ Written by Tyler Wayne."
   }
 
   _cs_cheat() {
-    if [ -f "$cs_path" ]; then
-      # On OSX, leading white space is added to wc output. Use awk to remove it.
-      local file_length=`wc -l $cs_path | awk '{$1=$1}1' | cut -d' ' -f1`
-      local term_length=`tput lines`
+    [ -f "$cs_path" ] || return 4;
 
-      # Page the cheatsheet if it's longer than the terminal
-      local output_pager
-      if [ $file_length -gt $term_length ] && [ -n "$PAGER" ]; then
-        output_pager=$PAGER
-      else
-        output_pager=cat
-      fi
+    # On OSX, leading white space is added to wc output. Use perl to remove it.
+    local file_length=`wc -l $cs_path | perl -alne 'print $F[0]'`
+    local term_length=`tput lines`
 
-      $output_pager $cs_path
+    # Page the cheatsheet if it's longer than the terminal
+    local output_pager
+    if [ $file_length -gt $term_length ] && [ -n "$PAGER" ]; then
+      output_pager=$PAGER
+    else
+      output_pager=cat
     fi
+
+    $output_pager $cs_path
   }
 
   case "$action" in 
     edit)   _cs_edit  ;;
     list)   _cs_list  ;;
     cheat)  _cs_cheat ;;
-    *)     echo "Error: action not recognized"; return 4 ;;
+    *)     echo "Error: action not recognized"; return 5 ;;
   esac
 
 }
