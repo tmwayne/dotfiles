@@ -48,6 +48,7 @@ alias ll='ls -lhA'
 alias rm='rm -i'
 alias rgrep='grep -Rls'
 alias vim='nvim'
+alias ed='ed --prompt "> " --extended-regex'
 
 alias gdb='gdb -q'
 alias python='python3'
