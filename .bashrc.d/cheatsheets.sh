@@ -137,3 +137,9 @@ _cs_completion() {
 
 complete -o bashdefault -F _cs_completion cs
 
+# Tmux helper ------------------------------------------------------------------
+
+if [ -n "$TMUX" ]; then
+  tmux bind-key '"' command-prompt "split-window -h \"bash -i -c 'cs %1 | less'\""
+  tmux bind-key '*' command-prompt "split-window    \"bash -i -c 'cs %1 | less'\""
+fi
