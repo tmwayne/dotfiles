@@ -144,7 +144,7 @@ if [ -n "$TMUX" ]; then
   tmux bind-key   b command-prompt -p "(cheatsheets)" \
     "split-window -h \"bash -i -c 'cs %1 | less'\""
 
-  tmux bind-key   B command-prompt -p "(cheatsheets)" \
+  tmux bind-key   B command-prompt -p "(Cheatsheets)" \
     "split-window    \"bash -i -c 'cs %1 | less'\""
 
 fi
