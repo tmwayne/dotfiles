@@ -33,8 +33,9 @@ export EDITOR=$([ $(which nvim 2> /dev/null) ] && echo nvim || echo vim)
 # colors -----------------------------------------------------------------------
 
 if [ -x /usr/bin/dircolors ]; then
-  test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || \
-    eval "$(dircolors -b)"
+  [ -r ~/.dircolors ] \
+    && eval "$(dircolors -b ~/.dircolors)" \
+    || eval "$(dircolors -b)"
   alias ls='ls --color=auto'
   alias grep='grep --color=auto'
   alias less='less -r'
@@ -44,10 +45,12 @@ export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quo
 
 # aliases ----------------------------------------------------------------------
 
-alias ll='ls -lhA'
+alias la='ls -lhA'
+alias l='ls -lh'
 alias rm='rm -i'
 alias rgrep='grep -Rls'
 alias vim='nvim'
+alias v='vim'
 alias ed='ed --prompt "> " --extended-regex'
 alias rg='rg --no-heading --line-number --column'
 
